@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    command: poetry run python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ledleydb
+      POSTGRES_USER: ledleyuser
+      POSTGRES_PASSWORD: ledleypass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

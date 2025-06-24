@@ -3,20 +3,22 @@ FROM python:3.11-slim
 # Instalar poetry
 RUN pip install --no-cache-dir poetry
 
-# Configurar poetry para no usar venv
+# Configurar poetry para no usar entornos virtuales
 ENV POETRY_VIRTUALENVS_CREATE=false
 
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos de poetry e instalar dependencias
-COPY pyproject.toml poetry.lock* /app/
-RUN poetry install --no-interaction --no-ansi
+# Copiar todos los archivos del proyecto
+COPY . .
 
-# Copiar el resto del código
-COPY . /app/
+# Instalar dependencias
+RUN poetry install --no-interaction --no-ansi --no-root
 
-# Exponer puerto (opcional)
+
+# Exponer el puerto (opcional)
 EXPOSE 8000
 
-# Comando por defecto
+# Comando por defecto al arrancar el contenedor
 CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+

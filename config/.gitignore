@@ -1,0 +1,8 @@
+# Python bytecode y caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de logs y bases de datos locales
+
+*.sqlite3

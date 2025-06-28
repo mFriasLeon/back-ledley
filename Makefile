@@ -6,7 +6,8 @@ up:
 
 # Abre una shell interactiva dentro del contenedor 'web'
 shell:
-exit
+	docker exec -it -u $(shell id -u):$(shell id -g) $(shell docker compose ps -q web) /bin/bash
+
 
 # Muestra logs del contenedor 'web' en tiempo real
 logs:

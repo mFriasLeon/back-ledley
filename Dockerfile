@@ -12,13 +12,14 @@ WORKDIR /app
 # Copiar todos los archivos del proyecto
 COPY . .
 
-# Instalar dependencias
-RUN poetry install --no-interaction --no-ansi --no-root
+# Añadir src al PYTHONPATH para que Python encuentre los módulos dentro de src/
+ENV PYTHONPATH="/app/src"
 
+# Instalar dependencias sin instalar el paquete raíz
+RUN poetry install --no-interaction --no-ansi --no-root
 
 # Exponer el puerto (opcional)
 EXPOSE 8000
 
 # Comando por defecto al arrancar el contenedor
 CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
-

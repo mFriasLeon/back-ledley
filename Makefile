@@ -1,9 +1,10 @@
 .PHONY: up shell logs down
 
 # Levanta los servicios con docker-compose (con volumen incluido)
+run: up migrate
+
 up:
 	docker compose up -d --build
-
 
 clean:
 	docker compose down -v --remove-orphans
@@ -12,6 +13,8 @@ clean:
 shell:
 	docker exec -it -u $(shell id -u):$(shell id -g) $(shell docker compose ps -q web) /bin/bash
 
+migrate:
+	docker exec -it $(shell docker compose ps -q web) poetry run python manage.py migrate
 
 # Muestra logs del contenedor 'web' en tiempo real
 logs:

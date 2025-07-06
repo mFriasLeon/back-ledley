@@ -25,4 +25,4 @@ class User(models.Model):
     
 
     def __str__(self):
-        return f"User ID{self.id}: Name: {self.name}, Role: {self.role}"
+        return f"User ID{self.id}: Name: {self.name}, Username: {self.username}, Email: {self.email}, Active: {self.active}"

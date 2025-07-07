@@ -5,8 +5,19 @@ from rest_framework import status
 from django.contrib.auth.hashers import check_password
 from rest_framework_simplejwt.tokens import RefreshToken
 from user.models import User
-
+from drf_spectacular.utils import extend_schema
 class LoginView(APIView):
+    @extend_schema(
+        request=LoginRequestSerializer,
+        responses={
+            200: TokenResponseSerializer,
+            400: "Bad Request",
+            401: "Unauthorized",
+            403: "Forbidden"
+        },
+        summary="User Login",
+        description="Endpoint for user login, returns JWT tokens if credentials are valid."
+    )
     def post(self, request):
         import ipdb; ipdb.set_trace()
         serializer = LoginRequestSerializer(data=request.data)

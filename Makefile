@@ -23,3 +23,9 @@ logs:
 # Para y elimina los contenedores
 down:
 	docker compose down
+
+format:
+	@echo "Fixing code with ruff"
+	poetry run ruff format .
+	@echo "Running ruff check linting..."
+	poetry run ruff check .

@@ -6,26 +6,25 @@ from django.contrib.auth.hashers import check_password
 from rest_framework_simplejwt.tokens import RefreshToken
 from user.models import User
 from drf_spectacular.utils import extend_schema
+
+
 class LoginView(APIView):
     @extend_schema(
         request=LoginRequestSerializer,
-        responses={
-            200: TokenResponseSerializer,
-            400: "Bad Request",
-            401: "Unauthorized",
-            403: "Forbidden"
-        },
+        responses={200: TokenResponseSerializer, 400: "Bad Request", 401: "Unauthorized", 403: "Forbidden"},
         summary="User Login",
-        description="Endpoint for user login, returns JWT tokens if credentials are valid."
+        description="Endpoint for user login, returns JWT tokens if credentials are valid.",
     )
     def post(self, request):
-        import ipdb; ipdb.set_trace()
+        import ipdb
+
+        ipdb.set_trace()
         serializer = LoginRequestSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         username = serializer.validated_data.get("username")
-        password = serializer.validated_data.get("password")                            
+        password = serializer.validated_data.get("password")
 
         try:
             user = User.objects.get(username=username)
@@ -40,12 +39,6 @@ class LoginView(APIView):
 
         refresh = RefreshToken.for_user(user)
 
-        response_serializer = TokenResponseSerializer({
-            "access": str(refresh.access_token),
-            "refresh": str(refresh)
-        })
+        response_serializer = TokenResponseSerializer({"access": str(refresh.access_token), "refresh": str(refresh)})
 
-        return Response(
-            response_serializer.data,
-            status=status.HTTP_200_OK
-        )
+        return Response(response_serializer.data, status=status.HTTP_200_OK)

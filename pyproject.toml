@@ -8,14 +8,32 @@ authors = [
 license = {text = "n"}
 readme = "README.md"
 requires-python = ">=3.11"
+
 dependencies = [
     "psycopg2-binary (>=2.9.10,<3.0.0)",
     "djangorestframework (>=3.16.0,<4.0.0)",
     "django (>=5.2.3,<6.0.0)",
     "djangorestframework-simplejwt (>=5.5.0,<6.0.0)",
-    "drf-spectacular (>=0.28.0,<0.29.0)"
+    "drf-spectacular (>=0.28.0,<0.29.0)",
+    "ruff (>=0.12.3,<0.13.0)",
+    "black (>=25.1.0,<26.0.0)",
+    "isort (>=6.0.1,<7.0.0)"
 ]
 
+[tool.ruff]
+line-length = 119
+select = ["E", "F", "W", "C", "DJ"]
+extend-select = ["DJ"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    ".venv",
+    "*.pyc",
+]
+
+fix = true  
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"

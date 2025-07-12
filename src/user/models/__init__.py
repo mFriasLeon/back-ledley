@@ -1,3 +1,3 @@
-from .user import User
-from .patient import Patient
-from .professional import Professional
+from .user import User  # noqa
+from .patient import Patient  # noqa
+from .professional import Professional  # noqa

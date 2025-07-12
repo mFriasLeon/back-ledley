@@ -5,40 +5,93 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.AutoField(db_comment='PK of a User', help_text='PK of a User', primary_key=True, serialize=False)),
-                ('username', models.CharField(max_length=150, unique=True)),
-                ('name', models.CharField(max_length=150)),
-                ('gender', models.CharField(choices=[('male', 'Male'), ('female', 'Female')], max_length=10)),
-                ('birth_date', models.DateField(blank=True, null=True)),
-                ('created_date', models.DateTimeField()),
-                ('email', models.CharField(blank=True, max_length=120, null=True)),
-                ('password', models.CharField(db_comment='Hashed password of the user', help_text='Hashed password of the user', max_length=128)),
-                ('active', models.BooleanField(default=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        db_comment="PK of a User", help_text="PK of a User", primary_key=True, serialize=False
+                    ),
+                ),
+                ("username", models.CharField(max_length=150, unique=True)),
+                ("name", models.CharField(max_length=150)),
+                ("gender", models.CharField(choices=[("male", "Male"), ("female", "Female")], max_length=10)),
+                ("birth_date", models.DateField(blank=True, null=True)),
+                ("created_date", models.DateTimeField()),
+                ("email", models.CharField(blank=True, max_length=120, null=True)),
+                (
+                    "password",
+                    models.CharField(
+                        db_comment="Hashed password of the user",
+                        help_text="Hashed password of the user",
+                        max_length=128,
+                    ),
+                ),
+                ("active", models.BooleanField(default=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Patient',
+            name="Patient",
             fields=[
-                ('user', models.ForeignKey(db_comment='FK to User', help_text='FK to User', on_delete=django.db.models.deletion.CASCADE, primary_key=True, related_name='patients', serialize=False, to='user.user')),
-                ('medical_record_number', models.CharField(db_comment='Unique medical record number for the patient', help_text='Unique medical record number for the patient', max_length=50, unique=True)),
-                ('allergies', models.TextField(blank=True, db_comment='Allergies of the patient', help_text='Allergies of the patient', null=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        db_comment="FK to User",
+                        help_text="FK to User",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        related_name="patients",
+                        serialize=False,
+                        to="user.user",
+                    ),
+                ),
+                (
+                    "medical_record_number",
+                    models.CharField(
+                        db_comment="Unique medical record number for the patient",
+                        help_text="Unique medical record number for the patient",
+                        max_length=50,
+                        unique=True,
+                    ),
+                ),
+                (
+                    "allergies",
+                    models.TextField(
+                        blank=True,
+                        db_comment="Allergies of the patient",
+                        help_text="Allergies of the patient",
+                        null=True,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Professional',
+            name="Professional",
             fields=[
-                ('user', models.ForeignKey(db_comment='FK to User', help_text='FK to User', on_delete=django.db.models.deletion.CASCADE, primary_key=True, related_name='professionals', serialize=False, to='user.user')),
-                ('role', models.CharField(db_comment='Role of the professional', help_text='Role of the professional', max_length=50)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        db_comment="FK to User",
+                        help_text="FK to User",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        related_name="professionals",
+                        serialize=False,
+                        to="user.user",
+                    ),
+                ),
+                (
+                    "role",
+                    models.CharField(
+                        db_comment="Role of the professional", help_text="Role of the professional", max_length=50
+                    ),
+                ),
             ],
         ),
     ]

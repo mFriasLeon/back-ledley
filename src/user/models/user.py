@@ -14,7 +14,7 @@ class User(models.Model):
     gender = models.CharField(max_length=10, choices=Gender.choices)
     birth_date = models.DateField(null=True, blank=True)
     created_date = models.DateTimeField()
-    email = models.CharField(max_length=120, blank=True)
+    email = models.CharField(max_length=120, null=True,blank=True)
     password = models.CharField(
         max_length=128, db_comment="Hashed password of the user", help_text="Hashed password of the user"
     )

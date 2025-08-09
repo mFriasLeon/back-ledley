@@ -17,7 +17,7 @@ class Patient(models.Model):
         help_text="Unique medical record number for the patient",
     )
     allergies = models.TextField(
-        blank=True, db_comment="Allergies of the patient", help_text="Allergies of the patient"
+       null=True, blank=True, db_comment="Allergies of the patient", help_text="Allergies of the patient"
     )
 
     def __str__(self):
